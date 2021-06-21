@@ -1100,10 +1100,11 @@ cy_rslt_t cyhal_adc_configure(cyhal_adc_t *obj, const cyhal_adc_config_t *config
         Cy_SAR_Enable(obj->base);
     }
 
-    if(obj->continuous_scanning)
+    if(config->continuous_scanning)
     {
-        obj->conversion_complete = false;
-        Cy_SAR_StartConvert(obj->base, CY_SAR_START_CONVERT_CONTINUOUS);
+    	obj->continuous_scanning = true;
+    	obj->conversion_complete = false;
+    	Cy_SAR_StartConvert(obj->base, CY_SAR_START_CONVERT_CONTINUOUS);
     }
     else
     {
